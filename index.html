@@ -3048,9 +3048,6 @@ PANDUAN MENJAWAB:
 - Batas topik: hanya seputar dampak AI pada jurusan/karir. Untuk pertanyaan di luar itu, arahkan kembali.
 - Jawaban ringkas dan to the point, maksimal 3-4 paragraf pendek kecuali diminta detail.`;
 
-    function aiGetKey() {
-      return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbnYiOiJwcm9kdWN0aW9uIiwia2lsb1VzZXJJZCI6ImI4YjU2Mjc4LWE1YWEtNDZmMC05NmEyLTEwZGQ3M2Q0NzYwMSIsImFwaVRva2VuUGVwcGVyIjpudWxsLCJ2ZXJzaW9uIjozLCJpYXQiOjE3NzY3MDE5NjQsImV4cCI6MTkzNDM4MTk2NH0.JdYjwqAEqAznbO6YcJqvczBTe2SuUrBl63VLqYDm56o';
-    }
 
     function aiInitChat() {
       if (aiHistory.length === 0) {
@@ -3066,9 +3063,7 @@ PANDUAN MENJAWAB:
 
       if (isOpen) {
         aiInitChat();
-        if (aiGetKey()) {
-          setTimeout(() => document.getElementById('aiInput').focus(), 220);
-        }
+        setTimeout(() => document.getElementById('aiInput').focus(), 220);
       }
     }
 
@@ -3164,7 +3159,7 @@ PANDUAN MENJAWAB:
     }
 
     async function aiAsk(text) {
-      if (aiIsStreaming || !aiGetKey()) return;
+      if (aiIsStreaming) return;
 
       // Hide suggestions after first real message
       document.getElementById('aiSuggestions').style.display = 'none';
