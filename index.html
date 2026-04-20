@@ -2908,7 +2908,7 @@
     cddInit();
 
     // ═══════════════════ AI CHAT ═══════════════════
-    const AI_ENDPOINT = 'https://api.kilo.ai/api/gateway/chat/completions';
+    const AI_ENDPOINT = '/api/chat'; // Netlify Function proxy (bypasses CORS)
     const AI_MODEL    = 'anthropic/claude-3-5-haiku-20241022';
     let aiHistory     = [];
     let aiIsStreaming = false;
@@ -3085,13 +3085,10 @@ PANDUAN MENJAWAB:
       try {
         const resp = await fetch(AI_ENDPOINT, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + aiGetKey(),
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             model: AI_MODEL,
-            stream: true,
+            stream: false,
             max_tokens: 600,
             messages: [
               { role: 'system', content: AI_SYSTEM_PROMPT },
@@ -3100,43 +3097,15 @@ PANDUAN MENJAWAB:
           })
         });
 
+        const data = await resp.json();
+
         if (!resp.ok) {
-          const err = await resp.json().catch(() => ({}));
-          throw new Error(err.error?.message || 'HTTP ' + resp.status);
+          throw new Error(data.error?.message || 'HTTP ' + resp.status);
         }
 
-        // Replace typing with empty bubble for streaming
-        typingBubble.innerHTML = '';
-        let fullText = '';
-        const container = document.getElementById('aiMessages');
-
-        const reader  = resp.body.getReader();
-        const decoder = new TextDecoder();
-        let buffer = '';
-
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-          buffer += decoder.decode(value, { stream: true });
-          const lines = buffer.split('\n');
-          buffer = lines.pop();
-
-          for (const line of lines) {
-            if (!line.startsWith('data: ')) continue;
-            const data = line.slice(6).trim();
-            if (data === '[DONE]') break;
-            try {
-              const json  = JSON.parse(data);
-              const delta = json.choices?.[0]?.delta?.content || '';
-              if (delta) {
-                fullText += delta;
-                typingBubble.innerHTML = aiRender(fullText);
-                container.scrollTop = container.scrollHeight;
-              }
-            } catch (_) {}
-          }
-        }
-
+        const fullText = data.choices?.[0]?.message?.content || '(Tidak ada jawaban)';
+        document.getElementById('aiTypingWrap')?.remove();
+        aiAddMsg('assistant', fullText);
         aiHistory.push({ role: 'assistant', content: fullText });
 
       } catch (err) {
