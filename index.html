@@ -821,8 +821,10 @@
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 16px;
-      overflow: hidden;
       box-shadow: var(--shadow-sm);
+      overflow: visible;
+      position: relative;
+      z-index: 10;
     }
 
     .compare-header {
@@ -832,6 +834,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      border-radius: 16px 16px 0 0;
     }
 
     .compare-header h3 {
@@ -877,29 +880,119 @@
       font-weight: 500;
     }
 
-    select {
+    /* ── CUSTOM DROPDOWN ── */
+    .cdd-wrap {
+      position: relative;
+    }
+
+    .cdd-trigger {
+      width: 100%;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 9px;
       color: var(--text);
       font-family: var(--font-display);
-      font-size: 0.84rem;
-      padding: 10px 12px;
-      outline: none;
-      transition: border-color 0.2s;
+      font-size: 0.82rem;
+      padding: 9px 36px 9px 12px;
       cursor: pointer;
-      appearance: none;
+      text-align: left;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: border-color 0.2s, box-shadow 0.2s;
       font-weight: 500;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%2378716c' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 10px center;
-      background-size: 16px;
-      padding-right: 32px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    select:focus {
+    .cdd-trigger::after {
+      content: '';
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%2378716c' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-size: 16px;
+      transition: transform 0.2s;
+    }
+
+    .cdd-wrap.open .cdd-trigger::after {
+      transform: translateY(-50%) rotate(180deg);
+    }
+
+    .cdd-trigger:focus, .cdd-wrap.open .cdd-trigger {
       border-color: rgba(var(--accent-rgb), 0.5);
       box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.08);
+      outline: none;
+    }
+
+    .cdd-trigger.placeholder {
+      color: var(--muted2);
+      font-weight: 400;
+    }
+
+    .cdd-panel {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      right: 0;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: var(--shadow-lg);
+      z-index: 9999;
+      max-height: 280px;
+      overflow-y: auto;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-6px);
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    .cdd-wrap.open .cdd-panel {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateY(0);
+    }
+
+    .cdd-group-label {
+      padding: 8px 12px 4px;
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      color: var(--muted2);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      border-top: 1px solid var(--border);
+    }
+
+    .cdd-group-label:first-child {
+      border-top: none;
+    }
+
+    .cdd-option {
+      padding: 7px 12px 7px 20px;
+      font-size: 0.8rem;
+      color: var(--text2);
+      cursor: pointer;
+      transition: background 0.12s;
+      font-weight: 500;
+    }
+
+    .cdd-option:hover, .cdd-option.focused {
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    .cdd-option.selected {
+      color: var(--accent);
+      background: rgba(var(--accent-rgb), 0.08);
     }
 
     .btn-compare {
@@ -1486,101 +1579,17 @@
         <div class="compare-input-row">
           <div class="compare-select-wrap">
             <label>Jurusan / Bidang Karir Utama</label>
-            <select id="major1">
-              <option value="">— Pilih jurusan —</option>
-              <optgroup label="🖥️ Teknologi">
-                <option value="cs">Teknik Informatika / Ilmu Komputer</option>
-                <option value="rpl">Rekayasa Perangkat Lunak</option>
-                <option value="ti">Teknik Industri</option>
-                <option value="data">Data Science / Statistika</option>
-                <option value="cyber">Keamanan Siber</option>
-                <option value="ai">Kecerdasan Buatan / AI</option>
-                <option value="network">Teknik Jaringan / Telekomunikasi</option>
-              </optgroup>
-              <optgroup label="💼 Bisnis &amp; Ekonomi">
-                <option value="accounting">Akuntansi</option>
-                <option value="finance">Manajemen Keuangan</option>
-                <option value="marketing">Pemasaran / Marketing</option>
-                <option value="management">Manajemen Bisnis</option>
-                <option value="economics">Ekonomi</option>
-              </optgroup>
-              <optgroup label="⚖️ Hukum &amp; Sosial">
-                <option value="law">Hukum / Ilmu Hukum</option>
-                <option value="social">Ilmu Sosial / Sosiologi</option>
-                <option value="comms">Komunikasi / Jurnalistik</option>
-                <option value="psy">Psikologi</option>
-              </optgroup>
-              <optgroup label="🎨 Seni &amp; Desain">
-                <option value="design">Desain Komunikasi Visual</option>
-                <option value="arts">Seni Rupa / Fine Arts</option>
-                <option value="film">Film &amp; Sinematografi</option>
-              </optgroup>
-              <optgroup label="🏥 Kesehatan">
-                <option value="medical">Kedokteran / Keperawatan</option>
-                <option value="pharmacy">Farmasi</option>
-                <option value="health_admin">Administrasi Kesehatan</option>
-              </optgroup>
-              <optgroup label="🏗️ Teknik &amp; Fisik">
-                <option value="civil">Teknik Sipil</option>
-                <option value="mechanical">Teknik Mesin</option>
-                <option value="electrical">Teknik Elektro</option>
-                <option value="architecture">Arsitektur</option>
-              </optgroup>
-              <optgroup label="🌾 Lainnya">
-                <option value="agri">Pertanian / Agribisnis</option>
-                <option value="education">Pendidikan / PGSD</option>
-                <option value="culinary">Perhotelan / Kuliner</option>
-              </optgroup>
-            </select>
+            <div class="cdd-wrap" id="cdd1">
+              <button class="cdd-trigger placeholder" type="button" id="cdd1-trigger" aria-haspopup="listbox" aria-expanded="false">— Pilih jurusan —</button>
+              <div class="cdd-panel" role="listbox" id="cdd1-panel"></div>
+            </div>
           </div>
           <div class="compare-select-wrap">
             <label>Jurusan Pembanding (opsional)</label>
-            <select id="major2">
-              <option value="">— Bandingkan dengan —</option>
-              <optgroup label="🖥️ Teknologi">
-                <option value="cs">Teknik Informatika / Ilmu Komputer</option>
-                <option value="rpl">Rekayasa Perangkat Lunak</option>
-                <option value="ti">Teknik Industri</option>
-                <option value="data">Data Science / Statistika</option>
-                <option value="cyber">Keamanan Siber</option>
-                <option value="ai">Kecerdasan Buatan / AI</option>
-                <option value="network">Teknik Jaringan / Telekomunikasi</option>
-              </optgroup>
-              <optgroup label="💼 Bisnis &amp; Ekonomi">
-                <option value="accounting">Akuntansi</option>
-                <option value="finance">Manajemen Keuangan</option>
-                <option value="marketing">Pemasaran / Marketing</option>
-                <option value="management">Manajemen Bisnis</option>
-                <option value="economics">Ekonomi</option>
-              </optgroup>
-              <optgroup label="⚖️ Hukum &amp; Sosial">
-                <option value="law">Hukum / Ilmu Hukum</option>
-                <option value="social">Ilmu Sosial / Sosiologi</option>
-                <option value="comms">Komunikasi / Jurnalistik</option>
-                <option value="psy">Psikologi</option>
-              </optgroup>
-              <optgroup label="🎨 Seni &amp; Desain">
-                <option value="design">Desain Komunikasi Visual</option>
-                <option value="arts">Seni Rupa / Fine Arts</option>
-                <option value="film">Film &amp; Sinematografi</option>
-              </optgroup>
-              <optgroup label="🏥 Kesehatan">
-                <option value="medical">Kedokteran / Keperawatan</option>
-                <option value="pharmacy">Farmasi</option>
-                <option value="health_admin">Administrasi Kesehatan</option>
-              </optgroup>
-              <optgroup label="🏗️ Teknik &amp; Fisik">
-                <option value="civil">Teknik Sipil</option>
-                <option value="mechanical">Teknik Mesin</option>
-                <option value="electrical">Teknik Elektro</option>
-                <option value="architecture">Arsitektur</option>
-              </optgroup>
-              <optgroup label="🌾 Lainnya">
-                <option value="agri">Pertanian / Agribisnis</option>
-                <option value="education">Pendidikan / PGSD</option>
-                <option value="culinary">Perhotelan / Kuliner</option>
-              </optgroup>
-            </select>
+            <div class="cdd-wrap" id="cdd2">
+              <button class="cdd-trigger placeholder" type="button" id="cdd2-trigger" aria-haspopup="listbox" aria-expanded="false">— Bandingkan dengan —</button>
+              <div class="cdd-panel" role="listbox" id="cdd2-panel"></div>
+            </div>
           </div>
         </div>
         <button class="btn-compare" onclick="runCompare()">Analisis Dampak AI →</button>
@@ -2373,8 +2382,8 @@
     }
 
     function runCompare() {
-      const v1 = document.getElementById('major1').value;
-      const v2 = document.getElementById('major2').value;
+      const v1 = cddGetValue('cdd1');
+      const v2 = cddGetValue('cdd2');
 
       if (!v1) { alert('Pilih setidaknya jurusan pertama dulu ya!'); return; }
 
@@ -2420,6 +2429,121 @@
       document.getElementById('singleResult').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
+    // ══════════════ CUSTOM DROPDOWN ══════════════
+    const CDD_DATA = [
+      { group: 'Teknologi', options: [
+        { value: 'cs',      label: 'Teknik Informatika / Ilmu Komputer' },
+        { value: 'rpl',     label: 'Rekayasa Perangkat Lunak' },
+        { value: 'ti',      label: 'Teknik Industri' },
+        { value: 'data',    label: 'Data Science / Statistika' },
+        { value: 'cyber',   label: 'Keamanan Siber' },
+        { value: 'ai',      label: 'Kecerdasan Buatan / AI' },
+        { value: 'network', label: 'Teknik Jaringan / Telekomunikasi' },
+      ]},
+      { group: 'Bisnis & Ekonomi', options: [
+        { value: 'accounting',  label: 'Akuntansi' },
+        { value: 'finance',     label: 'Manajemen Keuangan' },
+        { value: 'marketing',   label: 'Pemasaran / Marketing' },
+        { value: 'management',  label: 'Manajemen Bisnis' },
+        { value: 'economics',   label: 'Ekonomi' },
+      ]},
+      { group: 'Hukum & Sosial', options: [
+        { value: 'law',    label: 'Hukum / Ilmu Hukum' },
+        { value: 'social', label: 'Ilmu Sosial / Sosiologi' },
+        { value: 'comms',  label: 'Komunikasi / Jurnalistik' },
+        { value: 'psy',    label: 'Psikologi' },
+      ]},
+      { group: 'Seni & Desain', options: [
+        { value: 'design', label: 'Desain Komunikasi Visual' },
+        { value: 'arts',   label: 'Seni Rupa / Fine Arts' },
+        { value: 'film',   label: 'Film & Sinematografi' },
+      ]},
+      { group: 'Kesehatan', options: [
+        { value: 'medical',      label: 'Kedokteran / Keperawatan' },
+        { value: 'pharmacy',     label: 'Farmasi' },
+        { value: 'health_admin', label: 'Administrasi Kesehatan' },
+      ]},
+      { group: 'Teknik & Fisik', options: [
+        { value: 'civil',        label: 'Teknik Sipil' },
+        { value: 'mechanical',   label: 'Teknik Mesin' },
+        { value: 'electrical',   label: 'Teknik Elektro' },
+        { value: 'architecture', label: 'Arsitektur' },
+      ]},
+      { group: 'Lainnya', options: [
+        { value: 'agri',      label: 'Pertanian / Agribisnis' },
+        { value: 'education', label: 'Pendidikan / PGSD' },
+        { value: 'culinary',  label: 'Perhotelan / Kuliner' },
+      ]},
+    ];
+
+    const _cddState = {}; // { cdd1: '', cdd2: '' }
+
+    function cddGetValue(id) { return _cddState[id] || ''; }
+
+    function cddBuildPanel(id) {
+      const panel = document.getElementById(id + '-panel');
+      CDD_DATA.forEach(grp => {
+        const lbl = document.createElement('div');
+        lbl.className = 'cdd-group-label';
+        lbl.textContent = grp.group;
+        panel.appendChild(lbl);
+        grp.options.forEach(opt => {
+          const el = document.createElement('div');
+          el.className = 'cdd-option';
+          el.textContent = opt.label;
+          el.dataset.value = opt.value;
+          el.setAttribute('role', 'option');
+          el.onclick = () => cddPick(id, opt.value, opt.label);
+          panel.appendChild(el);
+        });
+      });
+    }
+
+    function cddOpen(id) {
+      // Close all others first
+      ['cdd1', 'cdd2'].forEach(x => { if (x !== id) cddClose(x); });
+      const wrap = document.getElementById(id);
+      wrap.classList.add('open');
+      document.getElementById(id + '-trigger').setAttribute('aria-expanded', 'true');
+    }
+
+    function cddClose(id) {
+      const wrap = document.getElementById(id);
+      wrap.classList.remove('open');
+      document.getElementById(id + '-trigger').setAttribute('aria-expanded', 'false');
+    }
+
+    function cddToggle(id) {
+      const isOpen = document.getElementById(id).classList.contains('open');
+      isOpen ? cddClose(id) : cddOpen(id);
+    }
+
+    function cddPick(id, value, label) {
+      _cddState[id] = value;
+      const trigger = document.getElementById(id + '-trigger');
+      trigger.textContent = label;
+      trigger.classList.remove('placeholder');
+      // Mark selected in panel
+      document.querySelectorAll('#' + id + '-panel .cdd-option').forEach(el => {
+        el.classList.toggle('selected', el.dataset.value === value);
+      });
+      cddClose(id);
+    }
+
+    function cddInit() {
+      ['cdd1', 'cdd2'].forEach(id => {
+        _cddState[id] = '';
+        cddBuildPanel(id);
+        document.getElementById(id + '-trigger').addEventListener('click', () => cddToggle(id));
+      });
+      // Close on outside click
+      document.addEventListener('click', e => {
+        ['cdd1', 'cdd2'].forEach(id => {
+          if (!document.getElementById(id).contains(e.target)) cddClose(id);
+        });
+      });
+    }
+
     // ===================== SCROLL REVEAL =====================
     const obs = new IntersectionObserver(
       entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
@@ -2429,6 +2553,7 @@
 
     renderTable();
     renderFigures();
+    cddInit();
   </script>
 </body>
 
