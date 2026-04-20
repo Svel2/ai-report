@@ -1,0 +1,2435 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FutureProof — Cek Dampak AI pada Jurusan Kuliah</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #fafaf9;
+      --surface: #f5f5f4;
+      --card: #ffffff;
+      --border: #e7e5e4;
+      --muted: #78716c;
+      --muted2: #a8a29e;
+      --text: #1c1917;
+      --text2: #292524;
+      --accent: #16a34a;
+      --accent-light: #dcfce7;
+      --accent-rgb: 22, 163, 74;
+      --danger: #dc2626;
+      --danger-light: #fee2e2;
+      --warn: #d97706;
+      --warn-light: #fef3c7;
+      --font-display: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-display);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 250, 249, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-brand span {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(var(--accent-rgb), 0.6);
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-tag {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .btn-source-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--muted2);
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .btn-source-nav:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.5;
+        transform: scale(0.75);
+      }
+    }
+
+    /* HERO */
+    .hero {
+      padding: 80px 2rem 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-light);
+      border: 1px solid rgba(var(--accent-rgb), 0.25);
+      padding: 4px 14px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--accent);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+      font-weight: 500;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.1rem, 3.8vw, 3.4rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.04;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+      max-width: 420px;
+      font-weight: 400;
+    }
+
+    .source-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+    }
+
+    .source-badge::before {
+      content: '';
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      background: #e7e5e4;
+      border-radius: 3px;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='3' y='2' width='10' height='12' rx='1' stroke='%2378716c' stroke-width='1.2'/%3E%3Cpath d='M5 5.5h6M5 8h6M5 10.5h4' stroke='%2378716c' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-size: contain;
+      flex-shrink: 0;
+    }
+
+    /* STATS CARDS */
+    .stats-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stat-card:hover {
+      border-color: rgba(var(--accent-rgb), 0.3);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .stat-card .stat-num {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-card .stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.67rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .stat-card.accent-card {
+      border-color: rgba(var(--accent-rgb), 0.3);
+      background: var(--accent-light);
+    }
+
+    .stat-card.accent-card .stat-num {
+      color: var(--accent);
+    }
+
+    /* DIVIDER */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* SECTION */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px 2rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-num {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--muted2);
+      letter-spacing: 0.08em;
+      font-weight: 400;
+    }
+
+    .section-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+
+    /* TOP EXPOSED TABLE */
+    .table-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead tr {
+      background: var(--surface);
+    }
+
+    th {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 500;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 14px 16px;
+      font-size: 0.84rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+      font-weight: 400;
+      color: var(--text2);
+    }
+
+    td strong {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background: var(--surface);
+    }
+
+    .exposure-bar-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .exposure-bar {
+      height: 5px;
+      border-radius: 999px;
+      background: var(--border);
+      flex: 1;
+      max-width: 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .exposure-bar-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), #4ade80);
+      transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .exposure-pct {
+      font-family: var(--font-mono);
+      font-size: 0.73rem;
+      font-weight: 600;
+      color: var(--accent);
+      min-width: 42px;
+    }
+
+    .exposure-pct.high {
+      color: var(--danger);
+    }
+
+    .exposure-pct.mid {
+      color: var(--warn);
+    }
+
+    .task-chip {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: 999px;
+      display: inline-block;
+      font-weight: 400;
+    }
+
+    .rank-num {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--muted2);
+      font-weight: 400;
+    }
+
+    /* SOURCE VIEWER SECTION */
+    .source-section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .source-header {
+      background: var(--surface);
+      padding: 1.1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .source-header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .source-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .source-header h3 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+    }
+
+    .source-tag {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      background: #1e293b;
+      color: #94a3b8;
+      padding: 2px 8px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .source-figures-scroll {
+      display: flex;
+      overflow-x: auto;
+      gap: 12px;
+      padding: 1.25rem 1.5rem;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    .source-fig-btn {
+      flex: 0 0 auto;
+      width: 200px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      scroll-snap-align: start;
+      text-align: left;
+    }
+
+    .source-fig-btn:hover {
+      border-color: rgba(var(--accent-rgb), 0.4);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .source-fig-btn.active {
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    .source-fig-img {
+      width: 100%;
+      height: 110px;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      border-bottom: 1px solid var(--border);
+      background: var(--border);
+    }
+
+    .source-fig-info {
+      padding: 0.6rem 0.75rem;
+    }
+
+    .source-fig-num {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 3px;
+      font-weight: 500;
+    }
+
+    .source-fig-title {
+      font-size: 0.72rem;
+      color: var(--text2);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.35;
+    }
+
+    /* ══════════════ LIGHTBOX PREMIUM ══════════════ */
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(5, 5, 8, 0.92);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 1rem;
+    }
+
+    .lightbox-overlay.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .lightbox-box {
+      background: #0f1117;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 1000px;
+      max-height: 92vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.04),
+        0 40px 100px rgba(0,0,0,0.7),
+        0 8px 32px rgba(0,0,0,0.5);
+      transform: scale(0.94) translateY(12px);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .lightbox-overlay.show .lightbox-box {
+      transform: scale(1) translateY(0);
+    }
+
+    /* ─── Header ─── */
+    .lightbox-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 1.25rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      background: rgba(255,255,255,0.03);
+      flex-shrink: 0;
+      gap: 12px;
+    }
+
+    .lightbox-header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .lightbox-fig-num {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      background: rgba(22,163,74,0.15);
+      border: 1px solid rgba(22,163,74,0.25);
+      padding: 2px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .lightbox-title {
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: rgba(255,255,255,0.85);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .lightbox-header-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    /* ─── Zoom controls ─── */
+    .lb-zoom-group {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 9px;
+      padding: 3px;
+    }
+
+    .lb-zoom-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      color: rgba(255,255,255,0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    .lb-zoom-btn:hover {
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.9);
+    }
+
+    .lb-zoom-level {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      color: rgba(255,255,255,0.4);
+      min-width: 36px;
+      text-align: center;
+      letter-spacing: 0.04em;
+      user-select: none;
+    }
+
+    .lightbox-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s;
+      flex-shrink: 0;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .lightbox-close:hover {
+      background: rgba(220,38,38,0.15);
+      border-color: rgba(220,38,38,0.3);
+      color: #f87171;
+    }
+
+    /* ─── Image area ─── */
+    .lightbox-img-wrap {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #080a0e;
+      position: relative;
+      min-height: 0;
+    }
+
+    .lightbox-img-wrap.dragging {
+      cursor: grabbing !important;
+    }
+
+    .lightbox-img-wrap.zoomable {
+      cursor: zoom-in;
+    }
+
+    .lb-img-container {
+      position: relative;
+      transform-origin: center center;
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+    }
+
+    .lb-img-container.no-transition {
+      transition: none;
+    }
+
+    .lb-img-container img {
+      display: block;
+      max-width: min(880px, 90vw);
+      max-height: 52vh;
+      width: auto;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+    }
+
+    /* Zoom hint badge */
+    .lb-zoom-hint {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.05em;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 1s ease;
+    }
+
+    .lb-zoom-hint.hidden {
+      opacity: 0;
+    }
+
+    /* ─── Caption ─── */
+    .lightbox-caption {
+      padding: 0.8rem 1.25rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-family: var(--font-mono);
+      font-size: 0.63rem;
+      color: rgba(255,255,255,0.38);
+      line-height: 1.7;
+      letter-spacing: 0.01em;
+      background: rgba(255,255,255,0.02);
+      flex-shrink: 0;
+      max-height: 80px;
+      overflow-y: auto;
+    }
+
+    /* ─── Nav footer ─── */
+    .lightbox-nav {
+      padding: 0.75rem 1.25rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.02);
+      flex-shrink: 0;
+      gap: 8px;
+    }
+
+    .lightbox-nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 8px;
+      padding: 7px 16px;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: rgba(255,255,255,0.55);
+      cursor: pointer;
+      transition: all 0.15s;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+
+    .lightbox-nav-btn:hover:not(:disabled) {
+      border-color: rgba(22,163,74,0.4);
+      color: var(--accent);
+      background: rgba(22,163,74,0.1);
+    }
+
+    .lightbox-nav-btn:disabled {
+      opacity: 0.25;
+      cursor: not-allowed;
+    }
+
+    .lightbox-counter {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.06em;
+    }
+
+    /* COMPARE TOOL */
+    .compare-tool {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .compare-header {
+      background: var(--surface);
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .compare-header h3 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+    }
+
+    .compare-header .beta-badge {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      background: var(--accent);
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+      font-weight: 500;
+    }
+
+    .compare-body {
+      padding: 1.5rem;
+    }
+
+    .compare-input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .compare-select-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .compare-select-wrap label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    select {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      color: var(--text);
+      font-family: var(--font-display);
+      font-size: 0.84rem;
+      padding: 10px 12px;
+      outline: none;
+      transition: border-color 0.2s;
+      cursor: pointer;
+      appearance: none;
+      font-weight: 500;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%2378716c' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 16px;
+      padding-right: 32px;
+    }
+
+    select:focus {
+      border-color: rgba(var(--accent-rgb), 0.5);
+      box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.08);
+    }
+
+    .btn-compare {
+      width: 100%;
+      padding: 13px 24px;
+      background: var(--text);
+      color: var(--bg);
+      border: none;
+      border-radius: 10px;
+      font-family: var(--font-display);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: -0.015em;
+    }
+
+    .btn-compare:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+    }
+
+    /* RESULT PANEL */
+    .result-panel {
+      margin-top: 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      overflow: hidden;
+      display: none;
+    }
+
+    .result-panel.show {
+      display: block;
+    }
+
+    .result-top {
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .result-jurusan {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+
+    .result-category {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    .risk-badge {
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .risk-high {
+      background: var(--danger-light);
+      color: var(--danger);
+      border: 1px solid #fca5a5;
+    }
+
+    .risk-med {
+      background: var(--warn-light);
+      color: var(--warn);
+      border: 1px solid #fcd34d;
+    }
+
+    .risk-low {
+      background: var(--accent-light);
+      color: var(--accent);
+      border: 1px solid #86efac;
+    }
+
+    .result-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--border);
+    }
+
+    .metric-item {
+      padding: 1rem 1.25rem;
+      border-right: 1px solid var(--border);
+    }
+
+    .metric-item:last-child {
+      border-right: none;
+    }
+
+    .metric-val {
+      font-size: 1.55rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .metric-val.danger {
+      color: var(--danger);
+    }
+
+    .metric-val.warn {
+      color: var(--warn);
+    }
+
+    .metric-val.safe {
+      color: var(--accent);
+    }
+
+    .metric-key {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .result-notes {
+      padding: 1rem 1.5rem;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .result-notes strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* COMPARE SIDE BY SIDE */
+    .compare-side {
+      margin-top: 1.25rem;
+      display: none;
+      gap: 1rem;
+    }
+
+    .compare-side.show {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .compare-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .compare-card-head {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .compare-card-name {
+      font-weight: 700;
+      font-size: 0.88rem;
+      margin-bottom: 2px;
+      letter-spacing: -0.015em;
+    }
+
+    .compare-card-cat {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      color: var(--muted);
+    }
+
+    .compare-card-body {
+      padding: 1.25rem;
+    }
+
+    .compare-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8rem;
+    }
+
+    .compare-row:last-child {
+      border-bottom: none;
+    }
+
+    .compare-row-key {
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+    }
+
+    .compare-row-val {
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: -0.01em;
+    }
+
+    .vs-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* KEY FINDINGS */
+    .findings-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .finding-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .finding-card:hover {
+      border-color: rgba(var(--accent-rgb), 0.3);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .finding-icon {
+      width: 32px;
+      height: 32px;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface);
+      border-radius: 8px;
+    }
+
+    .finding-card h4 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      margin-bottom: 0.4rem;
+      color: var(--text);
+    }
+
+    .finding-card p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    footer p {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--muted2);
+      letter-spacing: 0.03em;
+    }
+
+    /* REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-d1 {
+      transition-delay: 0.1s;
+    }
+
+    .reveal-d2 {
+      transition-delay: 0.2s;
+    }
+
+    .reveal-d3 {
+      transition-delay: 0.3s;
+    }
+
+    .reveal-d4 {
+      transition-delay: 0.4s;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 48px 1.25rem 40px;
+      }
+
+      .compare-input-row {
+        grid-template-columns: 1fr;
+      }
+
+      .result-metrics {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .findings-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .compare-side.show {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 48px 1.25rem;
+      }
+
+      .nav-tag {
+        display: none;
+      }
+
+      /* ── SOURCE SECTION mobile ── */
+      .source-header {
+        padding: 0.85rem 1rem;
+        gap: 8px;
+      }
+
+      .source-header h3 {
+        font-size: 0.82rem;
+        letter-spacing: -0.01em;
+        line-height: 1.4;
+      }
+
+      .source-tag {
+        font-size: 0.55rem;
+        padding: 2px 7px;
+      }
+
+      .source-figures-scroll {
+        padding: 1rem;
+        gap: 10px;
+      }
+
+      .source-fig-btn {
+        width: 160px;
+      }
+
+      .source-fig-img {
+        height: 90px;
+      }
+
+      .source-fig-title {
+        font-size: 0.68rem;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      /* ── MOBILE TABLE → CARD LAYOUT ── */
+      .table-wrap {
+        border-radius: 12px;
+      }
+
+      /* Hide the standard header row */
+      thead {
+        display: none;
+      }
+
+      /* Make table/tbody/tr behave as block */
+      table {
+        display: block;
+        width: 100%;
+      }
+
+      tbody {
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Each row becomes a self-contained card */
+      tbody tr {
+        display: grid;
+        grid-template-columns: 36px 1fr;
+        grid-template-rows: auto auto auto;
+        column-gap: 12px;
+        row-gap: 0;
+        padding: 1rem 1.1rem;
+        border-bottom: 1px solid var(--border);
+        background: var(--card);
+        transition: background 0.15s;
+      }
+
+      tbody tr:last-child {
+        border-bottom: none;
+      }
+
+      tbody tr:hover {
+        background: var(--surface);
+      }
+
+      /* All td resets */
+      tbody td {
+        padding: 0;
+        border-bottom: none;
+        font-size: 0.85rem;
+        background: transparent !important;
+      }
+
+      /* Col 1 → Rank badge: spans both row 1+2 on the left */
+      tbody td:nth-child(1) {
+        grid-column: 1;
+        grid-row: 1 / 3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-self: start;
+        margin-top: 2px;
+        width: 32px;
+        height: 32px;
+        background: var(--surface) !important;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        flex-shrink: 0;
+      }
+
+      tbody td:nth-child(1) .rank-num {
+        font-size: 0.72rem;
+        color: var(--muted);
+      }
+
+      /* Col 2 → Occupation name: row 1, right column */
+      tbody td:nth-child(2) {
+        grid-column: 2;
+        grid-row: 1;
+        font-size: 0.9rem;
+        font-weight: 700;
+        letter-spacing: -0.015em;
+        color: var(--text);
+        padding-bottom: 6px;
+        align-self: center;
+      }
+
+      /* Col 3 → Exposure bar: row 2, right column */
+      tbody td:nth-child(3) {
+        grid-column: 2;
+        grid-row: 2;
+        padding-bottom: 8px;
+      }
+
+      tbody td:nth-child(3) .exposure-bar {
+        max-width: none;
+        flex: 1;
+      }
+
+      tbody td:nth-child(3) .exposure-bar-wrap {
+        gap: 8px;
+      }
+
+      tbody td:nth-child(3) .exposure-pct {
+        font-size: 0.8rem;
+        font-weight: 700;
+        min-width: 44px;
+      }
+
+      /* Col 4 → Task chip: row 3, spans both columns */
+      tbody td:nth-child(4) {
+        grid-column: 1 / 3;
+        grid-row: 3;
+        padding-top: 4px;
+      }
+
+      tbody td:nth-child(4) .task-chip {
+        white-space: normal;
+        word-break: break-word;
+        font-size: 0.68rem;
+        line-height: 1.5;
+        display: inline-block;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-brand">
+      <span></span>
+      FutureProof
+    </div>
+    <div class="nav-right">
+      <div class="nav-tag">Anthropic Economic Index · 2026</div>
+      <a class="btn-source-nav" href="/Nowcasting_Econ-Report-v16.pdf" target="_blank" rel="noopener noreferrer">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+          <polyline points="14 2 14 8 20 8" />
+        </svg>
+        Lihat Data Asli
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div>
+      <div class="hero-label">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor">
+          <circle cx="5" cy="5" r="5" />
+        </svg>
+        Data Riset Terbaru · Maret 2026
+      </div>
+      <h1>Jurusanmu aman dari <em>dampak AI</em>?</h1>
+      <p>Cek seberapa besar risiko otomasi AI pada bidang kuliah yang kamu minati, berdasarkan laporan riset Anthropic
+        tentang pasar kerja global.</p>
+      <div class="source-badge">
+        Sumber: Labor Market Impacts of AI — Massenkoff &amp; McCrory, Anthropic (2026)
+      </div>
+    </div>
+    <div class="stats-col">
+      <div class="stat-card reveal">
+        <div class="stat-num">74.5%</div>
+        <div class="stat-label">Pekerjaan paling terdampak (Computer Programmer)</div>
+      </div>
+      <div class="stat-card accent-card reveal reveal-d1">
+        <div class="stat-num" style="color:var(--accent)">30%</div>
+        <div class="stat-label">Pekerja dengan nol dampak AI (pekerjaan fisik)</div>
+      </div>
+      <div class="stat-card reveal reveal-d2">
+        <div class="stat-num">−0.6pp</div>
+        <div class="stat-label">Penurunan proyeksi pertumbuhan tiap +10% paparan AI</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- COMPARE TOOL -->
+  <section>
+    <div class="section-header reveal">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Bandingkan Jurusan Kuliah</h2>
+    </div>
+
+    <div class="compare-tool reveal reveal-d1">
+      <div class="compare-header">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path
+            d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" />
+        </svg>
+        <h3>Tool Perbandingan Jurusan</h3>
+        <span class="beta-badge">BETA</span>
+      </div>
+      <div class="compare-body">
+        <div class="compare-input-row">
+          <div class="compare-select-wrap">
+            <label>Jurusan / Bidang Karir Utama</label>
+            <select id="major1">
+              <option value="">— Pilih jurusan —</option>
+              <optgroup label="🖥️ Teknologi">
+                <option value="cs">Teknik Informatika / Ilmu Komputer</option>
+                <option value="rpl">Rekayasa Perangkat Lunak</option>
+                <option value="ti">Teknik Industri</option>
+                <option value="data">Data Science / Statistika</option>
+                <option value="cyber">Keamanan Siber</option>
+                <option value="ai">Kecerdasan Buatan / AI</option>
+                <option value="network">Teknik Jaringan / Telekomunikasi</option>
+              </optgroup>
+              <optgroup label="💼 Bisnis &amp; Ekonomi">
+                <option value="accounting">Akuntansi</option>
+                <option value="finance">Manajemen Keuangan</option>
+                <option value="marketing">Pemasaran / Marketing</option>
+                <option value="management">Manajemen Bisnis</option>
+                <option value="economics">Ekonomi</option>
+              </optgroup>
+              <optgroup label="⚖️ Hukum &amp; Sosial">
+                <option value="law">Hukum / Ilmu Hukum</option>
+                <option value="social">Ilmu Sosial / Sosiologi</option>
+                <option value="comms">Komunikasi / Jurnalistik</option>
+                <option value="psy">Psikologi</option>
+              </optgroup>
+              <optgroup label="🎨 Seni &amp; Desain">
+                <option value="design">Desain Komunikasi Visual</option>
+                <option value="arts">Seni Rupa / Fine Arts</option>
+                <option value="film">Film &amp; Sinematografi</option>
+              </optgroup>
+              <optgroup label="🏥 Kesehatan">
+                <option value="medical">Kedokteran / Keperawatan</option>
+                <option value="pharmacy">Farmasi</option>
+                <option value="health_admin">Administrasi Kesehatan</option>
+              </optgroup>
+              <optgroup label="🏗️ Teknik &amp; Fisik">
+                <option value="civil">Teknik Sipil</option>
+                <option value="mechanical">Teknik Mesin</option>
+                <option value="electrical">Teknik Elektro</option>
+                <option value="architecture">Arsitektur</option>
+              </optgroup>
+              <optgroup label="🌾 Lainnya">
+                <option value="agri">Pertanian / Agribisnis</option>
+                <option value="education">Pendidikan / PGSD</option>
+                <option value="culinary">Perhotelan / Kuliner</option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="compare-select-wrap">
+            <label>Jurusan Pembanding (opsional)</label>
+            <select id="major2">
+              <option value="">— Bandingkan dengan —</option>
+              <optgroup label="🖥️ Teknologi">
+                <option value="cs">Teknik Informatika / Ilmu Komputer</option>
+                <option value="rpl">Rekayasa Perangkat Lunak</option>
+                <option value="ti">Teknik Industri</option>
+                <option value="data">Data Science / Statistika</option>
+                <option value="cyber">Keamanan Siber</option>
+                <option value="ai">Kecerdasan Buatan / AI</option>
+                <option value="network">Teknik Jaringan / Telekomunikasi</option>
+              </optgroup>
+              <optgroup label="💼 Bisnis &amp; Ekonomi">
+                <option value="accounting">Akuntansi</option>
+                <option value="finance">Manajemen Keuangan</option>
+                <option value="marketing">Pemasaran / Marketing</option>
+                <option value="management">Manajemen Bisnis</option>
+                <option value="economics">Ekonomi</option>
+              </optgroup>
+              <optgroup label="⚖️ Hukum &amp; Sosial">
+                <option value="law">Hukum / Ilmu Hukum</option>
+                <option value="social">Ilmu Sosial / Sosiologi</option>
+                <option value="comms">Komunikasi / Jurnalistik</option>
+                <option value="psy">Psikologi</option>
+              </optgroup>
+              <optgroup label="🎨 Seni &amp; Desain">
+                <option value="design">Desain Komunikasi Visual</option>
+                <option value="arts">Seni Rupa / Fine Arts</option>
+                <option value="film">Film &amp; Sinematografi</option>
+              </optgroup>
+              <optgroup label="🏥 Kesehatan">
+                <option value="medical">Kedokteran / Keperawatan</option>
+                <option value="pharmacy">Farmasi</option>
+                <option value="health_admin">Administrasi Kesehatan</option>
+              </optgroup>
+              <optgroup label="🏗️ Teknik &amp; Fisik">
+                <option value="civil">Teknik Sipil</option>
+                <option value="mechanical">Teknik Mesin</option>
+                <option value="electrical">Teknik Elektro</option>
+                <option value="architecture">Arsitektur</option>
+              </optgroup>
+              <optgroup label="🌾 Lainnya">
+                <option value="agri">Pertanian / Agribisnis</option>
+                <option value="education">Pendidikan / PGSD</option>
+                <option value="culinary">Perhotelan / Kuliner</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+        <button class="btn-compare" onclick="runCompare()">Analisis Dampak AI →</button>
+
+        <!-- Single result -->
+        <div class="result-panel" id="singleResult">
+          <div class="result-top">
+            <div>
+              <div class="result-jurusan" id="res1Name"></div>
+              <div class="result-category" id="res1Cat"></div>
+            </div>
+            <span class="risk-badge" id="res1Badge"></span>
+          </div>
+          <div class="result-metrics">
+            <div class="metric-item">
+              <div class="metric-val" id="res1Exposure"></div>
+              <div class="metric-key">Paparan AI</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-val" id="res1Growth"></div>
+              <div class="metric-key">Proyeksi Pertumbuhan 2024–2034</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-val" id="res1Risk"></div>
+              <div class="metric-key">Peluang Bertahan</div>
+            </div>
+          </div>
+          <div class="result-notes" id="res1Notes"></div>
+        </div>
+
+        <!-- Side by side compare -->
+        <div class="compare-side" id="compareResult">
+          <div class="compare-card" id="card1"></div>
+          <div class="compare-card" id="card2"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- TOP EXPOSED TABLE -->
+  <section>
+    <div class="section-header reveal">
+      <span class="section-num">02</span>
+      <h2 class="section-title">10 Pekerjaan Paling Terdampak AI</h2>
+    </div>
+    <p class="reveal" style="font-size:0.84rem;color:var(--muted);margin-bottom:1.5rem;max-width:600px;line-height:1.7">
+      Data dari laporan Anthropic berdasarkan penggunaan nyata Claude di setting profesional — bukan hanya kemampuan
+      teoritis AI.
+    </p>
+    <div class="table-wrap reveal reveal-d1">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Pekerjaan</th>
+            <th>Paparan AI</th>
+            <th>Tugas Utama yang Terotomasi</th>
+          </tr>
+        </thead>
+        <tbody id="topTable"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- PDF SOURCE VIEWER -->
+  <section>
+    <div class="section-header reveal">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Data Asli dari Laporan Riset</h2>
+    </div>
+    <p class="reveal" style="font-size:0.84rem;color:var(--muted);margin-bottom:1.5rem;max-width:620px;line-height:1.7">
+      Klik gambar di bawah untuk melihat grafik dan tabel langsung dari dokumen riset asli Anthropic. Semua data yang
+      ditampilkan di situs ini bersumber dari gambar-gambar berikut.
+    </p>
+    <div class="source-section reveal reveal-d1">
+      <div class="source-header">
+        <div class="source-header-left">
+          <div class="source-title-row">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0">
+              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+              <polyline points="10 9 9 9 8 9" />
+            </svg>
+            <h3>Nowcasting Economic Report — Massenkoff &amp; McCrory (2026)</h3>
+          </div>
+          <a class="source-tag" href="/Nowcasting_Econ-Report-v16.pdf" target="_blank" rel="noopener noreferrer"
+            style="text-decoration:none;cursor:pointer;">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:inline-block;vertical-align:middle;margin-right:4px">
+              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/>
+            </svg>
+            PDF · Anthropic
+          </a>
+        </div>
+      </div>
+      <div class="source-figures-scroll" id="figuresScroll">
+        <!-- Cards injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- KEY FINDINGS -->
+  <section>
+    <div class="section-header reveal">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Temuan Utama Riset</h2>
+    </div>
+    <div class="findings-grid">
+      <div class="finding-card reveal">
+        <div class="finding-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+            <polyline points="17 6 23 6 23 12" />
+          </svg>
+        </div>
+        <h4>AI jauh dari potensi penuhnya</h4>
+        <p>Meski secara teori 94% tugas di bidang Komputer &amp; Matematika bisa diotomasi, kenyataannya AI baru
+          benar-benar mengerjakan 33% dari itu. Masih ada jarak besar antara kemampuan dan penggunaan nyata.</p>
+      </div>
+      <div class="finding-card reveal reveal-d1">
+        <div class="finding-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--warn)" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 00-3-3.87" />
+            <path d="M16 3.13a4 4 0 010 7.75" />
+          </svg>
+        </div>
+        <h4>Pekerja muda paling merasakan dampaknya</h4>
+        <p>Ada penurunan 14% dalam tingkat rekrutmen pekerja usia 22–25 di pekerjaan-pekerjaan yang paling terdampak AI
+          sejak era ChatGPT. Ini sinyal awal yang perlu diperhatikan oleh fresh graduate.</p>
+      </div>
+      <div class="finding-card reveal reveal-d2">
+        <div class="finding-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" />
+            <path d="M8 21h8M12 17v4" />
+          </svg>
+        </div>
+        <h4>Pengangguran belum melonjak</h4>
+        <p>Tidak ada peningkatan pengangguran yang signifikan pada pekerja yang paling terdampak AI. Namun ini bisa
+          berubah seiring AI semakin canggih dan adopsinya meluas di berbagai industri.</p>
+      </div>
+      <div class="finding-card reveal reveal-d3">
+        <div class="finding-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          </svg>
+        </div>
+        <h4>Makin tinggi paparan, makin lambat pertumbuhan</h4>
+        <p>BLS memproyeksikan bahwa setiap kenaikan 10% paparan AI, proyeksi pertumbuhan pekerjaan turun 0,6 poin
+          persen. Jurusan dengan paparan tinggi perlu strategi adaptasi yang lebih matang.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 FutureProof — Berdasarkan data: Anthropic Economic Index, Massenkoff &amp; McCrory (2026)</p>
+    <p>Data hanya berlaku untuk pasar kerja AS. Gunakan sebagai referensi, bukan keputusan mutlak.</p>
+  </footer>
+
+  <!-- LIGHTBOX MODAL -->
+  <div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightboxOnBg(event)">
+    <div class="lightbox-box" id="lightboxBox">
+
+      <!-- Header -->
+      <div class="lightbox-header">
+        <div class="lightbox-header-left">
+          <span class="lightbox-fig-num" id="lbFigNum"></span>
+          <span class="lightbox-title" id="lbTitle"></span>
+        </div>
+        <div class="lightbox-header-right">
+          <!-- Zoom controls -->
+          <div class="lb-zoom-group">
+            <button class="lb-zoom-btn" id="lbZoomOut" onclick="lbZoom(-1)" title="Zoom out (-)">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/>
+              </svg>
+            </button>
+            <span class="lb-zoom-level" id="lbZoomLevel">100%</span>
+            <button class="lb-zoom-btn" id="lbZoomIn" onclick="lbZoom(1)" title="Zoom in (+)">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+              </svg>
+            </button>
+            <button class="lb-zoom-btn" id="lbZoomReset" onclick="lbResetZoom()" title="Reset zoom (R)" style="border-left:1px solid rgba(255,255,255,0.08);border-radius:0 5px 5px 0;padding-left:6px;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
+              </svg>
+            </button>
+          </div>
+          <!-- Close -->
+          <button class="lightbox-close" onclick="closeLightbox()" title="Tutup (Esc)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Image area -->
+      <div class="lightbox-img-wrap zoomable" id="lbImgWrap">
+        <div class="lb-img-container" id="lbImgContainer">
+          <img id="lbImg" src="" alt="" draggable="false">
+        </div>
+        <div class="lb-zoom-hint" id="lbZoomHint">scroll to zoom · drag to pan</div>
+      </div>
+
+      <!-- Caption -->
+      <div class="lightbox-caption" id="lbCaption"></div>
+
+      <!-- Nav footer -->
+      <div class="lightbox-nav">
+        <button class="lightbox-nav-btn" id="lbPrev" onclick="lbNavigate(-1)">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+          Sebelumnya
+        </button>
+        <span class="lightbox-counter" id="lbCounter"></span>
+        <button class="lightbox-nav-btn" id="lbNext" onclick="lbNavigate(1)">
+          Berikutnya
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===================== FIGURES DATA =====================
+    const FIGURES = [
+      {
+        num: "Figure 1",
+        title: "Share of Claude Usage by Exposure Rating",
+        titleId: "Distribusi Penggunaan Claude by Paparan Teoritis",
+        file: "/images/Share of Claude usage by Eloundou et al. exposure rating.png",
+        caption: "Grafik ini menunjukkan distribusi penggunaan Claude lintas tugas O*NET berdasarkan rating paparan AI teoretis. Tugas dengan β=1 (sepenuhnya layak untuk LLM) menyumbang 68% penggunaan Claude yang diamati, sedangkan tugas dengan β=0 (tidak layak) hanya 3%. Data berasal dari empat laporan Anthropic Economic Index sebelumnya."
+      },
+      {
+        num: "Figure 2",
+        title: "Theoretical Capability vs. Observed Exposure by Occupational Category",
+        titleId: "Kapabilitas Teoritis vs. Paparan Aktual per Kategori Pekerjaan",
+        file: "/images/Theoretical capability and observed usage by occupational category.png",
+        caption: "Gambar ini membandingkan share tugas yang secara teoritis dapat dilakukan LLM (area biru) dengan ukuran cakupan pekerjaan aktual kami dari data penggunaan (area merah). Contoh: Computer & Math memiliki kapabilitas teoritis 94%, namun hanya 33% yang benar-benar tercover di platform Anthropic."
+      },
+      {
+        num: "Figure 3",
+        title: "Most Exposed Occupations",
+        titleId: "10 Pekerjaan Paling Terdampak AI",
+        file: "/images/Most exposed occupations.png",
+        caption: "Gambar ini menunjukkan sepuluh pekerjaan yang paling terdampak menggunakan ukuran cakupan tugas kami. Computer Programmers berada di posisi teratas dengan 75% coverage, diikuti Customer Service Representatives, dan Data Entry Keyers (67%)."
+      },
+      {
+        num: "Figure 4",
+        title: "BLS Projected Employment Growth (2024–2034) vs. AI Exposure",
+        titleId: "Proyeksi Pertumbuhan BLS 2024–2034 vs. Paparan AI",
+        file: "/images/BLS projected employment growth from 2024-2034 vs. Al exposure.png",
+        caption: "Binned scatterplot dengan 25 kelompok sama besar. Setiap titik padat menunjukkan rata-rata paparan dan proyeksi perubahan pekerjaan. Garis putus-putus adalah regresi linear sederhana. Hasil: setiap kenaikan 10pp paparan AI, proyeksi pertumbuhan BLS turun 0,6 poin persen."
+      },
+      {
+        num: "Figure 5",
+        title: "Differences Between High and Low Exposure Workers",
+        titleId: "Perbedaan Karakteristik Pekerja: Paparan Tinggi vs. Rendah",
+        file: "/images/Differences between high and low exposure workers.png",
+        caption: "Tabel ini menunjukkan paparan, demografi, pendidikan, dan hasil pasar kerja dari Current Population Survey (Agustus–Oktober 2022). Kelompok paparan tinggi 16pp lebih mungkin perempuan, penghasilan 47% lebih tinggi, dan lebih berpendidikan (lulusan pascasarjana 17.4% vs 4.5% di kelompok tidak terdampak)."
+      },
+      {
+        num: "Figure 6",
+        title: "Unemployment Rate Trends: High vs. No AI Exposure",
+        titleId: "Tren Pengangguran: Paparan AI Tinggi vs. Tidak Terdampak",
+        file: "/images/Trends in unemployment rate for workers with high Al exposure and no Al exposure.png",
+        caption: "Panel atas menunjukkan tingkat pengangguran untuk pekerja di kuartil atas paparan (garis merah) dan 30% pekerja tanpa paparan. Panel bawah mengukur kesenjangan antara dua seri ini dalam kerangka difference-in-differences. Sejak ChatGPT, efeknya tidak signifikan secara statistik."
+      },
+      {
+        num: "Figure 7",
+        title: "New Job Starts: Young Workers (Age 22–25) by AI Exposure",
+        titleId: "Rekrutmen Pekerja Muda (22–25 tahun): Pekerjaan Paparan Tinggi vs. Rendah",
+        file: "/images/New job starts among workers age 22-25 in occupations with high and no Al exposure.png",
+        caption: "Panel atas menunjukkan persentase pekerja muda yang mulai pekerjaan baru di pekerjaan paparan tinggi vs. tidak ada paparan. Panel bawah mengukur kesenjangan dalam kerangka difference-in-differences. Ditemukan penurunan 14% dalam tingkat perekrutan di pekerjaan yang paling terdampak sejak era ChatGPT."
+      }
+    ];
+
+    // ===================== MAJORS DATA =====================
+    const MAJORS = {
+      // TEKNOLOGI
+      cs: {
+        name: "Teknik Informatika / Ilmu Komputer",
+        category: "Teknologi · Computer & Math",
+        exposure: 74.5, blsGrowth: +11.0, survival: 72, risk: "high",
+        notes: "<strong>Paparan sangat tinggi</strong> — pekerjaan seperti programmer teratas dengan 74.5% paparan AI. Namun bidang ini juga yang paling diuntungkan karena AI butuh manusia untuk deploy, maintain, dan mengembangkannya. Fokus ke AI engineering, system design, dan domain expertise untuk tetap relevan."
+      },
+      rpl: {
+        name: "Rekayasa Perangkat Lunak",
+        category: "Teknologi · Computer & Math",
+        exposure: 68.0, blsGrowth: +11.0, survival: 75, risk: "high",
+        notes: "<strong>Paparan tinggi tapi peluang tetap besar</strong> — RPL/Software Engineering menghadapi otomasi kode dengan AI seperti GitHub Copilot, namun human judgment dalam arsitektur sistem, keamanan, dan business logic tetap krusial. Kuasai AI tools sebagai productivity booster, bukan ancaman."
+      },
+      ti: {
+        name: "Teknik Industri",
+        category: "Teknologi · Architecture & Engineering",
+        exposure: 35.0, blsGrowth: +9.0, survival: 80, risk: "med",
+        notes: "<strong>Paparan moderat</strong> — Teknik Industri menggabungkan kerja fisik dan analitis. AI bisa membantu optimasi proses, tapi keputusan engineering di lapangan, koordinasi lintas departemen, dan penerapan di pabrik masih sangat butuh manusia."
+      },
+      data: {
+        name: "Data Science / Statistika",
+        category: "Teknologi · Computer & Math",
+        exposure: 64.8, blsGrowth: +35.0, survival: 85, risk: "high",
+        notes: "<strong>Paparan tinggi tapi prospek luar biasa</strong> — Justru bidang yang paling dibutuhkan di era AI. AI butuh data scientist untuk menyiapkan data, interpret hasil, dan komunikasikan insight ke bisnis. Market research analysts masuk top 10 paling terdampak (64.8%) tapi juga paling dicari."
+      },
+      cyber: {
+        name: "Keamanan Siber",
+        category: "Teknologi · Computer & Math",
+        exposure: 48.6, blsGrowth: +33.0, survival: 90, risk: "med",
+        notes: "<strong>Paparan sedang, prospek sangat bagus</strong> — Information security analysts punya 48.6% paparan AI menurut laporan Anthropic, tapi kebutuhan tenaga keamanan siber justru meroket karena AI juga menciptakan ancaman baru. Salah satu bidang paling resilient di era digital."
+      },
+      ai: {
+        name: "Kecerdasan Buatan / AI",
+        category: "Teknologi · Computer & Math",
+        exposure: 30.0, blsGrowth: +40.0, survival: 95, risk: "low",
+        notes: "<strong>Justru yang paling aman dan paling dicari</strong> — Orang yang membangun dan melatih AI tidak akan digantikan AI. Bidang ini adalah 'produser' dari tools yang mengancam pekerjaan lain. Prospek karir sangat cerah dengan gaji tertinggi di industri tech."
+      },
+      network: {
+        name: "Teknik Jaringan / Telekomunikasi",
+        category: "Teknologi · Computer & Math",
+        exposure: 40.0, blsGrowth: +5.0, survival: 78, risk: "med",
+        notes: "<strong>Paparan moderat</strong> — Pekerjaan jaringan yang bersifat fisik (pemasangan kabel, maintenance hardware) sulit diotomasi. Namun troubleshooting berbasis software dan monitoring mulai banyak diotomasi. Keahlian di cloud networking dan 5G masih sangat dibutuhkan."
+      },
+      // BISNIS
+      accounting: {
+        name: "Akuntansi",
+        category: "Bisnis & Keuangan · Business & Finance",
+        exposure: 55.0, blsGrowth: +4.0, survival: 65, risk: "high",
+        notes: "<strong>Paparan cukup tinggi</strong> — Akuntan masuk dalam daftar 10 pekerjaan paling terdampak di laporan Anthropic. Tugas-tugas repetitif seperti entri data dan rekonsiliasi sedang terotomasi pesat. Namun audit kompleks, advisory, dan interpretasi regulasi masih butuh manusia."
+      },
+      finance: {
+        name: "Manajemen Keuangan",
+        category: "Bisnis & Keuangan · Business & Finance",
+        exposure: 57.2, blsGrowth: +7.0, survival: 70, risk: "high",
+        notes: "<strong>Financial analyst punya paparan 57.2%</strong> menurut laporan Anthropic — masuk top 10. AI sangat baik dalam analisis data keuangan, namun keputusan investasi strategis, manajemen risiko, dan hubungan klien masih memerlukan sentuhan manusia."
+      },
+      marketing: {
+        name: "Pemasaran / Marketing",
+        category: "Bisnis & Keuangan · Business & Finance",
+        exposure: 55.0, blsGrowth: +6.0, survival: 68, risk: "high",
+        notes: "<strong>Paparan tinggi di area content & data</strong> — Market research analysts masuk top 10 pekerjaan paling terdampak (64.8%). Pembuatan konten dasar, analisis kampanye, dan targeting sudah banyak diotomasi. Namun strategi brand, creative direction, dan storytelling otentik masih sangat human-centric."
+      },
+      management: {
+        name: "Manajemen Bisnis",
+        category: "Bisnis & Keuangan · Management",
+        exposure: 28.0, blsGrowth: +5.0, survival: 80, risk: "low",
+        notes: "<strong>Paparan relatif rendah</strong> — Kepemimpinan, pengambilan keputusan strategis, manajemen manusia, dan navigasi politik organisasi sulit diotomasi. Management masuk dalam kategori dengan paparan rendah di radar chart laporan Anthropic."
+      },
+      economics: {
+        name: "Ekonomi",
+        category: "Bisnis & Keuangan · Life & Social Sciences",
+        exposure: 42.0, blsGrowth: +6.0, survival: 75, risk: "med",
+        notes: "<strong>Paparan moderat</strong> — Ekonom yang mengerjakan analisis data rutin terancam, namun penelitian ekonomi, pembuatan kebijakan, dan interpretasi kontekstual masih membutuhkan keahlian manusia yang mendalam."
+      },
+      // HUKUM & SOSIAL
+      law: {
+        name: "Hukum / Ilmu Hukum",
+        category: "Hukum · Legal",
+        exposure: 45.0, blsGrowth: +5.0, survival: 72, risk: "med",
+        notes: "<strong>Paparan sedang dengan nuansa besar</strong> — Legal masuk dalam area berkapasitas tinggi secara teoritis di laporan Anthropic. Riset hukum dan kontrak standar mulai diotomasi AI. Namun representasi klien di pengadilan adalah salah satu contoh tugas yang TIDAK bisa digantikan AI."
+      },
+      social: {
+        name: "Ilmu Sosial / Sosiologi",
+        category: "Sosial · Life & Social Sciences",
+        exposure: 20.0, blsGrowth: +4.0, survival: 85, risk: "low",
+        notes: "<strong>Paparan rendah</strong> — Penelitian sosial, etnografi, dan pekerjaan komunitas sangat bergantung pada interaksi manusia yang mendalam. Bidang ini relatif aman, meski lulusan perlu membekali diri dengan literasi data untuk tetap kompetitif."
+      },
+      comms: {
+        name: "Komunikasi / Jurnalistik",
+        category: "Seni & Media · Arts & Media",
+        exposure: 38.0, blsGrowth: +3.0, survival: 65, risk: "med",
+        notes: "<strong>Paparan moderat dengan tekanan nyata</strong> — Penulisan berita rutin dan konten standar sudah banyak diotomasi. Namun jurnalisme investigatif, wawancara mendalam, dan konten orisinal bernilai tinggi masih sangat butuh wartawan manusia."
+      },
+      psy: {
+        name: "Psikologi",
+        category: "Sosial · Social Services",
+        exposure: 15.0, blsGrowth: +7.0, survival: 90, risk: "low",
+        notes: "<strong>Paparan sangat rendah</strong> — Terapi dan konseling memerlukan empati, hubungan terapeutik, dan penilaian klinis yang sangat sulit diotomasi. Social services masuk dalam kategori paparan rendah di laporan Anthropic. Prospek sangat baik."
+      },
+      // SENI & DESAIN
+      design: {
+        name: "Desain Komunikasi Visual",
+        category: "Seni & Media · Arts & Media",
+        exposure: 42.0, blsGrowth: +3.0, survival: 68, risk: "med",
+        notes: "<strong>Paparan signifikan di area eksekusi</strong> — AI image generation mengubah industri desain dengan cepat. Namun creative direction, branding strategy, dan desain yang deeply kontekstual masih memerlukan manusia. Desainer yang menguasai AI tools justru akan semakin produktif."
+      },
+      arts: {
+        name: "Seni Rupa / Fine Arts",
+        category: "Seni & Media · Arts & Media",
+        exposure: 35.0, blsGrowth: +2.0, survival: 70, risk: "med",
+        notes: "<strong>Paparan moderat dengan perubahan pasar</strong> — Seni rupa murni masih sangat human-driven, namun pasar untuk ilustrasi komersial dan konten visual berubah cepat akibat AI generatif. Seniman yang mengembangkan gaya unik dan membangun audiens personal lebih tahan dampaknya."
+      },
+      film: {
+        name: "Film & Sinematografi",
+        category: "Seni & Media · Arts & Media",
+        exposure: 30.0, blsGrowth: +2.0, survival: 72, risk: "low",
+        notes: "<strong>Paparan moderat</strong> — Produksi film melibatkan banyak pekerjaan fisik dan kreatif yang sulit diotomasi sepenuhnya. Editing dan VFX dasar mulai terbantu AI, namun directing, sinematografi artistik, dan produksi fisik masih sangat human-dependent."
+      },
+      // KESEHATAN
+      medical: {
+        name: "Kedokteran / Keperawatan",
+        category: "Kesehatan · Healthcare Practitioners",
+        exposure: 18.0, blsGrowth: +9.0, survival: 92, risk: "low",
+        notes: "<strong>Paparan sangat rendah, prospek sangat baik</strong> — Healthcare practitioners masuk dalam kategori paparan rendah di laporan Anthropic. Diagnosis, prosedur medis, dan perawatan pasien membutuhkan judgment klinis, empati, dan kehadiran fisik yang tidak bisa digantikan AI."
+      },
+      pharmacy: {
+        name: "Farmasi",
+        category: "Kesehatan · Healthcare",
+        exposure: 25.0, blsGrowth: +5.0, survival: 82, risk: "low",
+        notes: "<strong>Paparan rendah</strong> — Meski dispensing obat otomatis berkembang, konsultasi farmasi, pharmaceutical care, dan clinical pharmacy tetap memerlukan expertise manusia. Laporan Anthropic mencatat bahwa tugas seperti 'otorisasi isi ulang obat' belum terobservasi dilakukan Claude."
+      },
+      health_admin: {
+        name: "Administrasi Kesehatan",
+        category: "Kesehatan · Healthcare Support",
+        exposure: 55.0, blsGrowth: +10.0, survival: 70, risk: "high",
+        notes: "<strong>Paparan cukup tinggi</strong> — Medical record specialists masuk top 10 paling terdampak (66.7%) karena tugas seperti coding dan abstraksi rekam medis banyak diotomasi. Namun healthcare support secara umum masih tumbuh seiring meningkatnya kebutuhan layanan kesehatan populasi yang menua."
+      },
+      // TEKNIK FISIK
+      civil: {
+        name: "Teknik Sipil",
+        category: "Teknik · Architecture & Engineering",
+        exposure: 22.0, blsGrowth: +6.0, survival: 85, risk: "low",
+        notes: "<strong>Paparan rendah</strong> — Pekerjaan fisik di lapangan, inspeksi site, dan koordinasi konstruksi sulit diotomasi. Software desain CAD semakin canggih dengan AI, namun engineering judgment dan tanggung jawab profesional tetap di tangan manusia."
+      },
+      mechanical: {
+        name: "Teknik Mesin",
+        category: "Teknik · Architecture & Engineering",
+        exposure: 25.0, blsGrowth: +10.0, survival: 83, risk: "low",
+        notes: "<strong>Paparan rendah</strong> — Design engineering, testing fisik, dan manufacturing masih sangat bergantung pada keahlian manusia. AI membantu simulasi dan optimasi desain, tapi tidak menggantikan mechanical engineers."
+      },
+      electrical: {
+        name: "Teknik Elektro",
+        category: "Teknik · Architecture & Engineering",
+        exposure: 28.0, blsGrowth: +11.0, survival: 82, risk: "low",
+        notes: "<strong>Paparan rendah, prospek sangat baik</strong> — Teknik Elektro sangat dibutuhkan di era elektrifikasi, EV, dan infrastruktur digital. Installation & repair masuk kategori paparan rendah dalam laporan Anthropic. Peluang karir sangat luas dari energi terbarukan hingga semikonduktor."
+      },
+      architecture: {
+        name: "Arsitektur",
+        category: "Teknik · Architecture & Engineering",
+        exposure: 30.0, blsGrowth: +3.0, survival: 78, risk: "low",
+        notes: "<strong>Paparan moderat</strong> — AI tools untuk desain arsitektur berkembang pesat, namun konsep kreatif, koordinasi proyek, dan tanggung jawab profesional tetap di tangan arsitek. Mereka yang menguasai AI design tools akan memiliki keunggulan kompetitif besar."
+      },
+      // LAINNYA
+      agri: {
+        name: "Pertanian / Agribisnis",
+        category: "Pertanian · Agriculture",
+        exposure: 5.0, blsGrowth: +1.0, survival: 88, risk: "low",
+        notes: "<strong>Paparan sangat rendah</strong> — Agricultural work masuk dalam kategori dengan nol atau hampir nol paparan AI di laporan Anthropic. Pekerjaan fisik seperti memangkas tanaman dan mengoperasikan mesin pertanian berada di luar jangkauan AI."
+      },
+      education: {
+        name: "Pendidikan / PGSD",
+        category: "Pendidikan · Education & Library",
+        exposure: 15.0, blsGrowth: +5.0, survival: 88, risk: "low",
+        notes: "<strong>Paparan sangat rendah</strong> — Laporan Anthropic secara eksplisit menyebut bahwa AI bisa menilai PR (augmentasi) tapi tidak bisa 'mengelola kelas' — sehingga guru dianggap kurang terdampak. Pendidikan sangat bergantung pada hubungan guru-murid, mentoring, dan adaptasi personal."
+      },
+      culinary: {
+        name: "Perhotelan / Kuliner",
+        category: "Layanan · Food & Serving",
+        exposure: 8.0, blsGrowth: +8.0, survival: 85, risk: "low",
+        notes: "<strong>Paparan sangat rendah</strong> — Cooks, chefs, dan hospitality staff masuk dalam 30% pekerja dengan nol coverage AI menurut laporan Anthropic. Pekerjaan fisik dan pengalaman pelanggan yang personal sulit diotomasi."
+      }
+    };
+
+    const TOP10 = [
+      { rank: 1, occ: "Computer Programmers", exp: 74.5, task: "Menulis, memperbarui, dan memelihara software" },
+      { rank: 2, occ: "Customer Service Representatives", exp: 70.1, task: "Menjawab pertanyaan & menangani keluhan pelanggan" },
+      { rank: 3, occ: "Data Entry Keyers", exp: 67.1, task: "Membaca dokumen sumber dan memasukkan data ke sistem" },
+      { rank: 4, occ: "Medical Record Specialists", exp: 66.7, task: "Mengkompilasi, mengabstraksi, dan mengkode data pasien" },
+      { rank: 5, occ: "Market Research Analysts", exp: 64.8, task: "Menyiapkan laporan dan memvisualisasikan data riset" },
+      { rank: 6, occ: "Sales Representatives (Wholesale & Mfg)", exp: 62.8, task: "Menghubungi pelanggan dan memproses pesanan" },
+      { rank: 7, occ: "Financial and Investment Analysts", exp: 57.2, task: "Analisis keuangan untuk forecasting bisnis" },
+      { rank: 8, occ: "Software QA Analysts & Testers", exp: 51.9, task: "Modifikasi software untuk koreksi error atau peningkatan" },
+      { rank: 9, occ: "Information Security Analysts", exp: 48.6, task: "Penilaian risiko dan keamanan pemrosesan data" },
+      { rank: 10, occ: "Computer User Support Specialists", exp: 46.8, task: "Menjawab pertanyaan pengguna terkait software/hardware" },
+    ];
+
+    // ===================== RENDER TABLE =====================
+    function renderTable() {
+      const tb = document.getElementById('topTable');
+      TOP10.forEach(row => {
+        const pct = row.exp;
+        const color = pct >= 65 ? 'high' : pct >= 50 ? 'mid' : '';
+        tb.innerHTML += `
+      <tr>
+        <td><span class="rank-num">${row.rank}</span></td>
+        <td><strong>${row.occ}</strong></td>
+        <td>
+          <div class="exposure-bar-wrap">
+            <div class="exposure-bar">
+              <div class="exposure-bar-fill" style="width:${pct}%"></div>
+            </div>
+            <span class="exposure-pct ${color}">${pct}%</span>
+          </div>
+        </td>
+        <td><span class="task-chip">${row.task}</span></td>
+      </tr>`;
+      });
+    }
+
+    // ===================== RENDER FIGURES =====================
+    function renderFigures() {
+      const container = document.getElementById('figuresScroll');
+      FIGURES.forEach((fig, idx) => {
+        const btn = document.createElement('div');
+        btn.className = 'source-fig-btn';
+        btn.id = `figBtn${idx}`;
+        btn.onclick = () => openLightbox(idx);
+        btn.innerHTML = `
+      <img class="source-fig-img" src="${fig.file}" alt="${fig.title}" loading="lazy">
+      <div class="source-fig-info">
+        <span class="source-fig-num">${fig.num}</span>
+        <div class="source-fig-title">${fig.titleId}</div>
+      </div>`;
+        container.appendChild(btn);
+      });
+    }
+
+    // ═══════════════════ LIGHTBOX + ZOOM ═══════════════════
+    let currentFigIdx = 0;
+    let lbScale = 1;
+    let lbTransX = 0;
+    let lbTransY = 0;
+    let lbIsDragging = false;
+    let lbDragStartX = 0;
+    let lbDragStartY = 0;
+    let lbDragOriginX = 0;
+    let lbDragOriginY = 0;
+    const LB_MIN = 0.15;
+    const LB_MAX = 4;
+    const LB_STEP = 0.25;
+    let lbHintTimer = null;
+
+    function lbApplyTransform(animate = true) {
+      const container = document.getElementById('lbImgContainer');
+      if (!container) return;
+      container.classList.toggle('no-transition', !animate);
+      container.style.transform = `translate(${lbTransX}px, ${lbTransY}px) scale(${lbScale})`;
+      document.getElementById('lbZoomLevel').textContent = Math.round(lbScale * 100) + '%';
+      document.getElementById('lbImgWrap').className =
+        'lightbox-img-wrap ' + (lbScale > 1 ? 'dragging-mode' : 'zoomable');
+    }
+
+    function lbResetZoom(animate = true) {
+      lbScale = 1; lbTransX = 0; lbTransY = 0;
+      lbApplyTransform(animate);
+    }
+
+    function lbZoom(dir) {
+      const next = Math.min(LB_MAX, Math.max(LB_MIN, lbScale + dir * LB_STEP));
+      lbScale = Math.round(next * 100) / 100;
+      lbApplyTransform(true);
+    }
+
+    function lbClampPan() {
+      const wrap = document.getElementById('lbImgWrap');
+      const img = document.getElementById('lbImg');
+      if (!wrap || !img) return;
+      const maxX = Math.max(0, (img.offsetWidth * lbScale - wrap.offsetWidth) / 2);
+      const maxY = Math.max(0, (img.offsetHeight * lbScale - wrap.offsetHeight) / 2);
+      lbTransX = Math.max(-maxX, Math.min(maxX, lbTransX));
+      lbTransY = Math.max(-maxY, Math.min(maxY, lbTransY));
+    }
+
+    // Mouse-wheel zoom
+    function lbOnWheel(e) {
+      e.preventDefault();
+      const delta = e.deltaY < 0 ? 1 : -1;
+      const next = Math.min(LB_MAX, Math.max(LB_MIN, lbScale + delta * LB_STEP));
+      lbScale = Math.round(next * 100) / 100;
+      lbClampPan();
+      lbApplyTransform(false);
+    }
+
+    // Drag-to-pan
+    function lbOnMouseDown(e) {
+      if (lbScale <= 1) return;
+      lbIsDragging = true;
+      lbDragStartX = e.clientX;
+      lbDragStartY = e.clientY;
+      lbDragOriginX = lbTransX;
+      lbDragOriginY = lbTransY;
+      document.getElementById('lbImgWrap').classList.add('dragging');
+      e.preventDefault();
+    }
+
+    function lbOnMouseMove(e) {
+      if (!lbIsDragging) return;
+      lbTransX = lbDragOriginX + (e.clientX - lbDragStartX);
+      lbTransY = lbDragOriginY + (e.clientY - lbDragStartY);
+      lbClampPan();
+      lbApplyTransform(false);
+    }
+
+    function lbOnMouseUp() {
+      lbIsDragging = false;
+      const wrap = document.getElementById('lbImgWrap');
+      if (wrap) wrap.classList.remove('dragging');
+    }
+
+    // Touch zoom & pan
+    let lbTouchDist = 0;
+    let lbTouchScaleStart = 1;
+    let lbTouchMidX = 0;
+    let lbTouchMidY = 0;
+
+    function lbTouchStart(e) {
+      if (e.touches.length === 2) {
+        const t = e.touches;
+        lbTouchDist = Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+        lbTouchScaleStart = lbScale;
+        lbTouchMidX = (t[0].clientX + t[1].clientX) / 2;
+        lbTouchMidY = (t[0].clientY + t[1].clientY) / 2;
+      } else if (e.touches.length === 1 && lbScale > 1) {
+        lbIsDragging = true;
+        lbDragStartX = e.touches[0].clientX;
+        lbDragStartY = e.touches[0].clientY;
+        lbDragOriginX = lbTransX;
+        lbDragOriginY = lbTransY;
+      }
+    }
+
+    function lbTouchMove(e) {
+      if (e.touches.length === 2) {
+        e.preventDefault();
+        const t = e.touches;
+        const dist = Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+        lbScale = Math.min(LB_MAX, Math.max(LB_MIN, lbTouchScaleStart * (dist / lbTouchDist)));
+        lbScale = Math.round(lbScale * 100) / 100;
+        lbClampPan();
+        lbApplyTransform(false);
+      } else if (e.touches.length === 1 && lbIsDragging) {
+        e.preventDefault();
+        lbTransX = lbDragOriginX + (e.touches[0].clientX - lbDragStartX);
+        lbTransY = lbDragOriginY + (e.touches[0].clientY - lbDragStartY);
+        lbClampPan();
+        lbApplyTransform(false);
+      }
+    }
+
+    function lbTouchEnd() { lbIsDragging = false; }
+
+    function showHint() {
+      const hint = document.getElementById('lbZoomHint');
+      if (!hint) return;
+      hint.classList.remove('hidden');
+      clearTimeout(lbHintTimer);
+      lbHintTimer = setTimeout(() => hint.classList.add('hidden'), 2800);
+    }
+
+    function openLightbox(idx) {
+      currentFigIdx = idx;
+      lbResetZoom(false);
+      updateLightbox();
+      const overlay = document.getElementById('lightboxOverlay');
+      overlay.classList.add('show');
+      document.body.style.overflow = 'hidden';
+      document.querySelectorAll('.source-fig-btn').forEach((b, i) => {
+        b.classList.toggle('active', i === idx);
+      });
+      showHint();
+      // Attach wheel & drag listeners once
+      const wrap = document.getElementById('lbImgWrap');
+      if (wrap && !wrap._lbBound) {
+        wrap._lbBound = true;
+        wrap.addEventListener('wheel', lbOnWheel, { passive: false });
+        wrap.addEventListener('mousedown', lbOnMouseDown);
+        wrap.addEventListener('touchstart', lbTouchStart, { passive: true });
+        wrap.addEventListener('touchmove', lbTouchMove, { passive: false });
+        wrap.addEventListener('touchend', lbTouchEnd);
+        document.addEventListener('mousemove', lbOnMouseMove);
+        document.addEventListener('mouseup', lbOnMouseUp);
+      }
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightboxOverlay').classList.remove('show');
+      document.body.style.overflow = '';
+      document.querySelectorAll('.source-fig-btn').forEach(b => b.classList.remove('active'));
+    }
+
+    function closeLightboxOnBg(e) {
+      if (e.target === document.getElementById('lightboxOverlay')) closeLightbox();
+    }
+
+    function updateLightbox() {
+      const fig = FIGURES[currentFigIdx];
+      document.getElementById('lbFigNum').textContent = fig.num;
+      document.getElementById('lbTitle').textContent = fig.titleId;
+      document.getElementById('lbImg').src = fig.file;
+      document.getElementById('lbImg').alt = fig.title;
+      document.getElementById('lbCaption').textContent = fig.caption;
+      document.getElementById('lbCounter').textContent = `${currentFigIdx + 1} / ${FIGURES.length}`;
+      document.getElementById('lbPrev').disabled = currentFigIdx === 0;
+      document.getElementById('lbNext').disabled = currentFigIdx === FIGURES.length - 1;
+    }
+
+    function lbNavigate(dir) {
+      const newIdx = currentFigIdx + dir;
+      if (newIdx < 0 || newIdx >= FIGURES.length) return;
+      currentFigIdx = newIdx;
+      lbResetZoom(false);
+      updateLightbox();
+      document.querySelectorAll('.source-fig-btn').forEach((b, i) => {
+        b.classList.toggle('active', i === currentFigIdx);
+      });
+      const btn = document.getElementById(`figBtn${currentFigIdx}`);
+      if (btn) btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+
+    // ── Keyboard shortcuts ──
+    document.addEventListener('keydown', e => {
+      const overlay = document.getElementById('lightboxOverlay');
+      if (!overlay.classList.contains('show')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') lbNavigate(-1);
+      if (e.key === 'ArrowRight') lbNavigate(1);
+      if (e.key === '+' || e.key === '=') lbZoom(1);
+      if (e.key === '-') lbZoom(-1);
+      if (e.key === 'r' || e.key === 'R' || e.key === '0') lbResetZoom();
+    });
+
+    // ===================== COMPARE =====================
+    function getRiskLabel(risk) {
+      if (risk === 'high') return ['risk-high', 'Risiko Tinggi'];
+      if (risk === 'med') return ['risk-med', 'Risiko Sedang'];
+      return ['risk-low', 'Risiko Rendah'];
+    }
+    function getValClass(exposure) {
+      if (exposure >= 60) return 'danger';
+      if (exposure >= 40) return 'warn';
+      return 'safe';
+    }
+    function getGrowthStr(g) {
+      return (g >= 0 ? '+' : '') + g + '%';
+    }
+    function getSurvivalClass(s) {
+      if (s >= 80) return 'safe';
+      if (s >= 65) return 'warn';
+      return 'danger';
+    }
+
+    function buildCard(data, cardEl) {
+      const [badgeClass, badgeLabel] = getRiskLabel(data.risk);
+      const valClass = getValClass(data.exposure);
+      const survClass = getSurvivalClass(data.survival);
+      cardEl.innerHTML = `
+    <div class="compare-card-head">
+      <div class="compare-card-name">${data.name}</div>
+      <div class="compare-card-cat">${data.category}</div>
+    </div>
+    <div class="compare-card-body">
+      <div class="compare-row">
+        <span class="compare-row-key">Paparan AI</span>
+        <span class="compare-row-val" style="color:var(--${valClass === 'safe' ? 'accent' : valClass === 'warn' ? 'warn' : 'danger'})">${data.exposure}%</span>
+      </div>
+      <div class="compare-row">
+        <span class="compare-row-key">Proyeksi Pertumbuhan 2024–2034</span>
+        <span class="compare-row-val">${getGrowthStr(data.blsGrowth)}</span>
+      </div>
+      <div class="compare-row">
+        <span class="compare-row-key">Peluang Bertahan</span>
+        <span class="compare-row-val" style="color:var(--${survClass === 'safe' ? 'accent' : survClass === 'warn' ? 'warn' : 'danger'})">${data.survival}%</span>
+      </div>
+      <div class="compare-row">
+        <span class="compare-row-key">Level Risiko</span>
+        <span class="risk-badge ${badgeClass}">${badgeLabel}</span>
+      </div>
+      <div style="margin-top:1rem;font-size:0.78rem;color:var(--muted);line-height:1.65;">${data.notes}</div>
+    </div>`;
+    }
+
+    function runCompare() {
+      const v1 = document.getElementById('major1').value;
+      const v2 = document.getElementById('major2').value;
+
+      if (!v1) { alert('Pilih setidaknya jurusan pertama dulu ya!'); return; }
+
+      const d1 = MAJORS[v1];
+      const singlePanel = document.getElementById('singleResult');
+      const comparePanel = document.getElementById('compareResult');
+
+      if (!v2 || v1 === v2) {
+        singlePanel.className = 'result-panel show';
+        comparePanel.className = 'compare-side';
+
+        const [badgeClass, badgeLabel] = getRiskLabel(d1.risk);
+        const valClass = getValClass(d1.exposure);
+        const survClass = getSurvivalClass(d1.survival);
+
+        document.getElementById('res1Name').textContent = d1.name;
+        document.getElementById('res1Cat').textContent = d1.category;
+        document.getElementById('res1Badge').textContent = badgeLabel;
+        document.getElementById('res1Badge').className = 'risk-badge ' + badgeClass;
+
+        const expEl = document.getElementById('res1Exposure');
+        expEl.textContent = d1.exposure + '%';
+        expEl.className = 'metric-val ' + valClass;
+
+        const growEl = document.getElementById('res1Growth');
+        growEl.textContent = getGrowthStr(d1.blsGrowth);
+        growEl.className = 'metric-val ' + (d1.blsGrowth >= 10 ? 'safe' : d1.blsGrowth >= 5 ? 'warn' : 'danger');
+
+        const riskEl = document.getElementById('res1Risk');
+        riskEl.textContent = d1.survival + '%';
+        riskEl.className = 'metric-val ' + survClass;
+
+        document.getElementById('res1Notes').innerHTML = d1.notes;
+
+      } else {
+        singlePanel.className = 'result-panel';
+        comparePanel.className = 'compare-side show';
+        const d2 = MAJORS[v2];
+        buildCard(d1, document.getElementById('card1'));
+        buildCard(d2, document.getElementById('card2'));
+      }
+
+      document.getElementById('singleResult').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // ===================== SCROLL REVEAL =====================
+    const obs = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.06, rootMargin: '0px 0px -30px 0px' }
+    );
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    renderTable();
+    renderFigures();
+  </script>
+</body>
+
+</html>
