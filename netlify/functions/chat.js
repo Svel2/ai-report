@@ -1,5 +1,3 @@
-const KILO_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbnYiOiJwcm9kdWN0aW9uIiwia2lsb1VzZXJJZCI6ImI4YjU2Mjc4LWE1YWEtNDZmMC05NmEyLTEwZGQ3M2Q0NzYwMSIsImFwaVRva2VuUGVwcGVyIjpudWxsLCJ2ZXJzaW9uIjozLCJpYXQiOjE3NzY3MDE5NjQsImV4cCI6MTkzNDM4MTk2NH0.JdYjwqAEqAznbO6YcJqvczBTe2SuUrBl63VLqYDm56o';
-
 const CORS = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'Content-Type',
@@ -23,7 +21,7 @@ exports.handler = async (event) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.KILO_API_KEY || KILO_KEY}`,
+        'Authorization': `Bearer ${process.env.KILO_API_KEY}`,
       },
       body: JSON.stringify(body),
     });
